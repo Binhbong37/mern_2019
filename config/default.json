@@ -1,3 +1,4 @@
 {
-    "mongooseURI": "mongodb://localhost:27017/mern_2019"
+    "mongooseURI": "mongodb://localhost:27017/mern_2019",
+    "jwtSecret": "mysecreattoken"
 }
