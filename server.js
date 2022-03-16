@@ -8,6 +8,7 @@ connectDB();
 
 // Initial Middleware
 app.use(express.json({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
     res.send('API Running . . . ');
