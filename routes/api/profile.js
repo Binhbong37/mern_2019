@@ -82,4 +82,26 @@ router.delete('/experience/:expId', auth, async (req, res) => {
     }
 });
 
+// @route   PUT api/profile/education
+// @desc    Add profile education
+// @access  Private
+router.put(
+    '/education',
+    [
+        auth,
+        [
+            body('school', 'School is required').not().isEmpty(),
+            body('degree', 'Degree is required').not().isEmpty(),
+            body('fieldofstudy', 'Field of study is required').not().isEmpty(),
+            body('from', 'From Date is required').not().isEmpty(),
+        ],
+    ],
+    profileController.postAddEducation
+);
+
+// @route   DELETE api/profile/education/eduId
+// @desc    DELETE education from profile
+// @access  Private
+router.delete('/education/:eduId', auth, profileController.deleteEdu);
+
 module.exports = router;

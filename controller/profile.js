@@ -179,3 +179,56 @@ exports.postAddExperience = async (req, res) => {
         res.status(500).json('Sever Error');
     }
 };
+
+// @route   PUT api/profile/education
+// @desc    Add profile education
+// @access  Private
+exports.postAddEducation = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { school, degree, fieldofstudy, from, to, current, description } =
+        req.body;
+
+    const newEdu = {
+        school,
+        degree,
+        fieldofstudy,
+        from,
+        to,
+        current,
+        description,
+    };
+    try {
+        let profile = await Profile.findOne({ user: req.user.id });
+        profile.education.unshift(newEdu);
+        await profile.save();
+        res.json(profile);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json('Sever Error');
+    }
+};
+
+exports.deleteEdu = async (req, res) => {
+    const eduId = req.params.eduId;
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        // Get remove index
+        const removeIndex = profile.education
+            .map((item) => item._id)
+            .indexOf(eduId);
+
+        profile.education.splice(removeIndex, 1);
+
+        await profile.save();
+
+        res.json(profile);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json('Sever Error');
+    }
+};
