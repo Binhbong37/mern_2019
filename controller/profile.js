@@ -127,3 +127,23 @@ exports.getprofileByUser = async (req, res) => {
         res.status(500).json('Sever Error');
     }
 };
+
+// @route   DELETE api/profile
+// @desc    Delete profile, user and pots
+// @access  Private
+exports.postDeleteProfile = async (req, res) => {
+    try {
+        // remove user pots
+
+        // remove profile
+        await Profile.findOneAndRemove({ user: req.user.id });
+
+        // remove user
+        await User.findOneAndRemove({ _id: req.user.id });
+
+        res.json({ msg: 'User deleted' });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json('Sever Error');
+    }
+};

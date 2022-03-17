@@ -1,0 +1,8 @@
+1. Khi tạo user sẽ có kèm TOKEN ( token được tạo sau khi đã lưu user vào db check phần id)
+2. login cũng cần phải có TOKEN
+( được tạo sau khi đã check qua phần login k.tra ở db xem có dữ liệu không thì mới LOGIn => 
+qua được phần kiểm tra này sẽ tạo token => từ lúc này sẽ gán id của user cho token được gọi là Payload)
+3. Qua được phần kiểm tra token sẽ tạo profile, mỗi 1 user chỉ có 1 profile ( có thể update, tạo mới luôn), chỉ user mới tạo được cho mình 
+4. Lấy được tất cả profile để hiển thị, có thể hiện thị từng profile của từng USER
+5. XÓA, xóa user => profile => post ( những gì liên quan tới user sẽ cùng bị xóa )
+( đang làm xóa dựa trên token, k có truyền ID params ) Dung findOneAndRemove
