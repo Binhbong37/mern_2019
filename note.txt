@@ -6,3 +6,5 @@ qua được phần kiểm tra này sẽ tạo token => từ lúc này sẽ gán
 4. Lấy được tất cả profile để hiển thị, có thể hiện thị từng profile của từng USER
 5. XÓA, xóa user => profile => post ( những gì liên quan tới user sẽ cùng bị xóa )
 ( đang làm xóa dựa trên token, k có truyền ID params ) Dung findOneAndRemove
+6, 7: Tạo thêm phần experience và education bên trong PROFILE add và xóa
+đang bỏ qua video 23 ( phần add repo trên github)
