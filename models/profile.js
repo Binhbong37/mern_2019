@@ -52,7 +52,7 @@ const ProfileShema = new Schema({
             description: { type: String },
         },
     ],
-    sosial: {
+    social: {
         youtube: { type: String },
         twitter: { type: String },
         facebook: { type: String },
