@@ -1,5 +1,7 @@
 const express = require('express');
 const { body } = require('express-validator/check');
+const Profile = require('../../models/profile');
+// const User = require('../models/users');
 
 const router = express.Router();
 const auth = require('../../middleware/auth');
@@ -39,5 +41,45 @@ router.get('/user/:user_id', profileController.getprofileByUser);
 // @desc    Delete profile, user and pots
 // @access  Private
 router.delete('/', auth, profileController.postDeleteProfile);
+
+// @route   PUT api/profile/experience
+// @desc    Add profile experience
+// @access  Private
+router.put(
+    '/experience',
+    [
+        auth,
+        [
+            body('title', 'Title is required').not().isEmpty(),
+            body('company', 'Company is required').not().isEmpty(),
+            body('from', 'From Date is required').not().isEmpty(),
+        ],
+    ],
+    profileController.postAddExperience
+);
+
+// @route   DELETE api/profile/experience/expID
+// @desc    DELETE experience from profile
+// @access  Private
+router.delete('/experience/:expId', auth, async (req, res) => {
+    const expId = req.params.expId;
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+
+        // Get remove index
+        const removeIndex = profile.experience
+            .map((item) => item._id)
+            .indexOf(expId);
+
+        profile.experience.splice(removeIndex, 1);
+
+        await profile.save();
+
+        res.json(profile);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json('Sever Error');
+    }
+});
 
 module.exports = router;

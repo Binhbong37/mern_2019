@@ -147,3 +147,35 @@ exports.postDeleteProfile = async (req, res) => {
         res.status(500).json('Sever Error');
     }
 };
+
+// @route   PUT api/profile/experience
+// @desc    Add profile experience
+// @access  Private
+exports.postAddExperience = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { title, company, location, from, to, current, description } =
+        req.body;
+
+    const newExp = {
+        title,
+        company,
+        location,
+        from,
+        to,
+        current,
+        description,
+    };
+    try {
+        let profile = await Profile.findOne({ user: req.user.id });
+        profile.experience.unshift(newExp);
+        await profile.save();
+        res.json(profile);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json('Sever Error');
+    }
+};
