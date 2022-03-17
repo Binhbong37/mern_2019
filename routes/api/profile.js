@@ -11,7 +11,7 @@ const profileController = require('../../controller/profile');
 router.get('/me', auth, profileController.getProfile);
 
 // @route   POST api/profile
-// @desc    Create of update profile
+// @desc    Create AND update profile
 // @access  Private
 router.post(
     '/',
@@ -24,5 +24,15 @@ router.post(
     ],
     profileController.postProfile
 );
+
+// @route   GET api/profile
+// @desc    GET all profiles
+// @access  Public
+router.get('/', profileController.getprofiles);
+
+// @route   GET api/profile/user/:user_id
+// @desc    GET all profiles by user ID
+// @access  Public
+router.get('/user/:user_id', profileController.getprofileByUser);
 
 module.exports = router;

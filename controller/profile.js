@@ -20,6 +20,9 @@ exports.getProfile = async (req, res) => {
     }
 };
 
+// @route   POST api/profile
+// @desc    Create AND update profile
+// @access  Private
 exports.postProfile = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -79,5 +82,48 @@ exports.postProfile = async (req, res) => {
     } catch (error) {
         console.log(error.message);
         res.status(500).json('Server Error');
+    }
+};
+
+// @route   GET api/profile
+// @desc    GET all profiles
+// @access  Public
+exports.getprofiles = async (req, res) => {
+    try {
+        const profiles = await Profile.find().populate('user', [
+            'name',
+            'avatar',
+        ]);
+        res.json(profiles);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json('Sever Error');
+    }
+};
+
+// @route   GET api/profile/user/:user_id
+// @desc    GET all profiles by user ID
+// @access  Public
+exports.getprofileByUser = async (req, res) => {
+    const user_id = req.params.user_id;
+    try {
+        const profile = await Profile.findOne({ user: user_id }).populate(
+            'user',
+            ['name', 'avatar']
+        );
+        if (!profile) {
+            return res
+                .status(400)
+                .json({ msg: 'There is no profile for this user' });
+        }
+        res.json(profile);
+    } catch (error) {
+        console.log(error.message);
+        if (error.kind == 'ObjectId') {
+            return res
+                .status(400)
+                .json({ msg: 'There is no profile for this user' });
+        }
+        res.status(500).json('Sever Error');
     }
 };
