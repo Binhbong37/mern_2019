@@ -8,3 +8,8 @@ qua được phần kiểm tra này sẽ tạo token => từ lúc này sẽ gán
 ( đang làm xóa dựa trên token, k có truyền ID params ) Dung findOneAndRemove
 6, 7: Tạo thêm phần experience và education bên trong PROFILE add và xóa
 đang bỏ qua video 23 ( phần add repo trên github)
+II. Qua phần tạo post
+1. Xem lại phần logic của model để tạo 1 db
+2. tạo ra post, 1 người có thể tạo được nhiều bài post, có thể thấy tất cả bài post của người khác
+3. Xem từng bài post, xóa bài post, chỉ người tạo mới có thể xóa được bài của mình
+
