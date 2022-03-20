@@ -3,6 +3,8 @@ import {
     REGISTER_FAIL,
     USER_LOADED,
     AUTH_ERR,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -12,7 +14,7 @@ const initialState = {
     user: null,
 };
 
-export default function (state = initialState, action) {
+const auth = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
         case USER_LOADED:
@@ -23,6 +25,7 @@ export default function (state = initialState, action) {
                 user: payload,
             };
         case REGISTER_SUCCESS:
+        case LOGIN_SUCCESS:
             localStorage.setItem('token', payload.token);
             return {
                 ...state,
@@ -32,6 +35,7 @@ export default function (state = initialState, action) {
             };
         case REGISTER_FAIL:
         case AUTH_ERR:
+        case LOGIN_FAIL:
             localStorage.removeItem('token');
             return {
                 ...state,
@@ -42,4 +46,6 @@ export default function (state = initialState, action) {
         default:
             return state;
     }
-}
+};
+
+export default auth;

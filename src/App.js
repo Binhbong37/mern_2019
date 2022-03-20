@@ -20,7 +20,6 @@ const App = () => {
     }, []);
     return (
         <Router>
-            {console.log('Vao day truoc co')}
             <Fragment>
                 <Navbar />
                 <Route exact path="/" component={Landing} />
