@@ -1,10 +1,12 @@
 import React, { Fragment, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setAlert } from '../actions/alert';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-function Register({ setAlert }) {
+function Register({ setAlert, register }) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -26,7 +28,7 @@ function Register({ setAlert }) {
         if (password !== password2) {
             setAlert('Password is not match', 'danger');
         } else {
-            console.log('SUCCESS REGISTER: ', formData);
+            register({ name, email, password });
         }
     };
     return (
@@ -47,7 +49,6 @@ function Register({ setAlert }) {
                         name="name"
                         value={name}
                         onChange={(e) => onChange(e)}
-                        required
                     />
                 </div>
                 <div className="form-group">
@@ -57,7 +58,6 @@ function Register({ setAlert }) {
                         name="email"
                         value={email}
                         onChange={(e) => onChange(e)}
-                        required
                     />
                     <small className="form-text">
                         This site uses Gravatar so if you want a profile image,
@@ -99,6 +99,7 @@ function Register({ setAlert }) {
 
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
