@@ -1,14 +1,26 @@
 import './App.css';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './component/layout/Navbar';
 import Landing from './component/layout/Landing';
 import Login from './component/auth/Login';
 import Register from './component/auth/Register';
 import Alert from './component/layout/Alert';
+import store from './store';
+import { loadedUser } from './actions/auth';
+import setAuthToken from './untils/setToken';
+
+if (localStorage.token) {
+    setAuthToken(localStorage.token);
+}
+
 const App = () => {
+    useEffect(() => {
+        store.dispatch(loadedUser());
+    }, []);
     return (
         <Router>
+            {console.log('Vao day truoc co')}
             <Fragment>
                 <Navbar />
                 <Route exact path="/" component={Landing} />
