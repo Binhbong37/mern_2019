@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import Navbar from './component/layout/Navbar';
+import Landing from './component/layout/Landing';
 import './App.css';
 
 const App = () => {
     return (
         <Fragment>
             <Navbar />
-            <i className="far fa-address-book"></i>
-            <h1>Hello world</h1>
+            <Landing />
         </Fragment>
     );
 };
