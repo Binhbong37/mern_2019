@@ -1,10 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createProfile } from '../../actions/profile';
+import { createProfile, getCurrentProfile } from '../../actions/profile';
 
-const CreateProfile = ({ createProfile, history }) => {
+const EditProfile = ({
+    createProfile,
+    getCurrentProfile,
+    history,
+    profile: { loading, profile },
+}) => {
     const [formData, setFormData] = useState({
         company: '',
         website: '',
@@ -21,6 +26,30 @@ const CreateProfile = ({ createProfile, history }) => {
     });
 
     const [displaySosialInput, toggleSocialInput] = useState(false);
+
+    useEffect(() => {
+        // eslint-disable-next-line
+        getCurrentProfile();
+
+        setFormData({
+            company: loading || !profile.company ? '' : profile.company,
+            status: loading || !profile.status ? '' : profile.status,
+            location: loading || !profile.location ? '' : profile.location,
+            skills: loading || !profile.skills ? '' : profile.skills.join(','),
+            website: loading || !profile.website ? '' : profile.website,
+            githubusername:
+                loading || !profile.githubusername
+                    ? ''
+                    : profile.githubusername,
+            bio: loading || !profile.bio ? '' : profile.bio,
+            twitter: loading || !profile.social ? '' : profile.social.twitter,
+            facebook: loading || !profile.social ? '' : profile.social.facebook,
+            linkedin: loading || !profile.social ? '' : profile.social.linkedin,
+            youtube: loading || !profile.social ? '' : profile.social.youtube,
+            instagram:
+                loading || !profile.social ? '' : profile.social.instagram,
+        });
+    }, [loading]); // eslint-disable-next-line
 
     const {
         company,
@@ -48,7 +77,7 @@ const CreateProfile = ({ createProfile, history }) => {
     // GET DATA TO SUBMIT
     const onSubmit = (e) => {
         e.preventDefault();
-        createProfile(formData, history);
+        createProfile(formData, history, true);
     };
 
     return (
@@ -245,14 +274,18 @@ const CreateProfile = ({ createProfile, history }) => {
     );
 };
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired,
 };
 
-// const mapStateToProps = state => {
-//     return {
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profile,
+    };
+};
 
-//     }
-// }
-
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
+    withRouter(EditProfile)
+);

@@ -4,3 +4,5 @@ Chú ý đăng ký/ đăng nhập ( dữ liệu đi kèm phải có trong db r�
 video 45: Sử dụng redux kết nối tới get profile ( đã lấy được profile chú ý ai có mới lấy được)
 video 46: Sau khi vào trang dashboard thì hiện thông tin người đã đăng nhập, hiển thị code nếu người đó chưa có profile thì tạo mới... ( chú ý logic set up những chỗ này)
 video 47: Tạo form PROFILE để điền thông tin rồi gửi về server
+video 48: Đã tạo được profile điền từ phía client.
+Video 49: Sửa được profile từ phía client
