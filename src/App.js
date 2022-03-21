@@ -6,6 +6,8 @@ import Landing from './component/layout/Landing';
 import Login from './component/auth/Login';
 import Register from './component/auth/Register';
 import Alert from './component/layout/Alert';
+import Dashboard from './component/dashboard/Dashboard';
+import PrivateRoute from './component/routing/PrivateRoute';
 import store from './store';
 import { loadedUser } from './actions/auth';
 import setAuthToken from './untils/setToken';
@@ -28,6 +30,11 @@ const App = () => {
                     <Switch>
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
+                        <PrivateRoute
+                            exact
+                            path="/dashboard"
+                            component={Dashboard}
+                        />
                     </Switch>
                 </section>
             </Fragment>
