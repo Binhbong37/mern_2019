@@ -6,3 +6,4 @@ video 46: Sau khi vào trang dashboard thì hiện thông tin người đã đă
 video 47: Tạo form PROFILE để điền thông tin rồi gửi về server
 video 48: Đã tạo được profile điền từ phía client.
 Video 49: Sửa được profile từ phía client
+VIDEO 50: Thêm được 2 trường Experience và Education

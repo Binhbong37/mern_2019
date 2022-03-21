@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PROFILE_ERR, GET_PROFILE } from '../actions/types';
+import { PROFILE_ERR, GET_PROFILE, UPDATE_PROFILE } from '../actions/types';
 import { setAlert } from './alert';
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -66,3 +66,77 @@ export const createProfile =
             });
         }
     };
+
+// Add Experience
+export const addExperience = (formData, history) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const res = await axios.put(
+            'http://localhost:5000/api/profile/experience',
+            formData,
+            config
+        );
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data,
+        });
+        dispatch(setAlert('Experience Added', 'success'));
+        history.push('/dashboard');
+    } catch (error) {
+        const errors = error.response.data.errors;
+        console.log('ERR action create Profile: ', errors);
+        if (errors) {
+            errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+        }
+        dispatch({
+            type: PROFILE_ERR,
+            payload: {
+                msg: error.response.statusText,
+                status: error.response.status,
+            },
+        });
+    }
+};
+
+// Add Education
+export const addEducation = (formData, history) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const res = await axios.put(
+            'http://localhost:5000/api/profile/education',
+            formData,
+            config
+        );
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data,
+        });
+        dispatch(setAlert('Education Added', 'success'));
+        history.push('/dashboard');
+    } catch (error) {
+        const errors = error.response.data.errors;
+        console.log('ERR action create Profile: ', errors);
+        if (errors) {
+            errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+        }
+        dispatch({
+            type: PROFILE_ERR,
+            payload: {
+                msg: error.response.statusText,
+                status: error.response.status,
+            },
+        });
+    }
+};
