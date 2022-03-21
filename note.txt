@@ -1,0 +1,5 @@
+1 Phần frontend:
+Chú ý đăng ký/ đăng nhập ( dữ liệu đi kèm phải có trong db rồi, k thì khỏi GET)
+
+video 45: Sử dụng redux kết nối tới get profile ( đã lấy được profile chú ý ai có mới lấy được)
+video 46: Sau khi vào trang dashboard thì hiện thông tin người đã đăng nhập, hiển thị code nếu người đó chưa có profile thì tạo mới... ( chú ý logic set up những chỗ này)
