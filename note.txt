@@ -12,3 +12,5 @@ Video 52: Xóa được phần EXP EDU, xóa được ACCOUNT (Sửa thêm logic
 SECTION 10
 Vdieo 53: Cài đặt phần action và reducer để lấy thông tin toàn bộ profile từ db
 video 54: Hiển thị toàn bộ phần profile của tất cả user ra màn hình
+Video 55: fix warning phần useEffect ( Chưa xử lý được hết)
+56, 57: Hiển thị phần Top có avatar, phần about các skill của 1 user (tất cả user đều xem được)
