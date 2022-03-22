@@ -8,3 +8,7 @@ video 48: Đã tạo được profile điền từ phía client.
 Video 49: Sửa được profile từ phía client
 VIDEO 50: Thêm được 2 trường Experience và Education
 Video 51: Hiển thị 2 phần EXP EDU ra màn hình, phía client
+Video 52: Xóa được phần EXP EDU, xóa được ACCOUNT (Sửa thêm logic ở phía server file profile controle
+SECTION 10
+Vdieo 53: Cài đặt phần action và reducer để lấy thông tin toàn bộ profile từ db
+video 54: Hiển thị toàn bộ phần profile của tất cả user ra màn hình

@@ -5,12 +5,56 @@ import {
     UPDATE_PROFILE,
     CLEAR_PROFILE,
     DELETE_ACCOUNT,
+    GET_PROFILES,
 } from '../actions/types';
 import { setAlert } from './alert';
 
 export const getCurrentProfile = () => async (dispatch) => {
     try {
         const res = await axios.get('http://localhost:5000/api/profile/me');
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: PROFILE_ERR,
+            payload: {
+                msg: error.response.statusText,
+                status: error.response.status,
+            },
+        });
+    }
+};
+
+// GET ALL PROFILE
+export const getAllProfile = () => async (dispatch) => {
+    dispatch({ type: CLEAR_PROFILE });
+    try {
+        const res = await axios.get('http://localhost:5000/api/profile');
+
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: PROFILE_ERR,
+            payload: {
+                msg: error.response.statusText,
+                status: error.response.status,
+            },
+        });
+    }
+};
+
+// GET PROFILE with ID
+export const getProfileById = (userId) => async (dispatch) => {
+    try {
+        const res = await axios.get(
+            `http://localhost:5000/api/profile/user/${userId}`
+        );
 
         dispatch({
             type: GET_PROFILE,
