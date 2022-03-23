@@ -15,3 +15,8 @@ video 54: Hiển thị toàn bộ phần profile của tất cả user ra màn h
 Video 55: fix warning phần useEffect ( Chưa xử lý được hết)
 56, 57: Hiển thị phần Top có avatar, phần about các skill của 1 user (tất cả user đều xem được),
 58. Hiển thị chi tiết phần exp, edu khi kích vào view từng user (lưu ý cách truyền props của từng file)
+59. Phần GITHub
+
+Section11. 
+video 61: setup lấy dữ liệu từ B.E dùng redux
+video 62: Lấy thông tin từ post để hiển thị, hiển thị được hết các bài post của tất cả các bài
